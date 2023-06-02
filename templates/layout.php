@@ -58,7 +58,7 @@ $user_name = 'Natali'; // укажите здесь ваше имя
             <!--заполните этот список из массива категорий-->
             <?php foreach ($categories as $value): ?>
             <li class="nav__item">
-                <a href="pages/all-lots.html"><?=$value; ?></a>
+                <a href="pages/all-lots.html"><?= htmlspecialchars($value); ?></a>
             </li>
             <?php endforeach; ?>
         </ul>
