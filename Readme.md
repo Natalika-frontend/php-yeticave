@@ -1,4 +1,4 @@
-# Личный проект «{{projectTitle}}»[Readme.md](Readme.md)
+# Личный проект «{{projectTitle}}»
 
 * Студент: [{{userName}}]({{userProfile}}).
 * Наставник: `Неизвестно`.
