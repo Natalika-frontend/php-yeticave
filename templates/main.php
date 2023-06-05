@@ -35,8 +35,12 @@
                             <span class="lot__cost"><?=
                                 format_sum(htmlspecialchars($good["start_price"])); ?></span>
                         </div>
-                        <div class="lot__timer timer">
-                            12:23
+                        <?php
+                        $time_finish = get_remaining_time($good["expiration_date"]); ?>
+                        <div class="lot__timer timer <?php
+                        if ($time_finish[0] < 1): ?> timer--finishing <?php
+                        endif; ?>">
+                            <?= "$time_finish[0]: $time_finish[1]"; ?>
                         </div>
                     </div>
                 </div>
