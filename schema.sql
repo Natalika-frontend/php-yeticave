@@ -40,7 +40,9 @@ CREATE TABLE bets
 (
     id       INT AUTO_INCREMENT PRIMARY KEY,
     bet_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    sum      INT,
-    FOREIGN KEY (id) REFERENCES user (id),
-    FOREIGN KEY (id) REFERENCES lots (id)
+    sum_bet  INT,
+    user_id  INT,
+    lot_id   INT,
+    FOREIGN KEY (user_id) REFERENCES user (id),
+    FOREIGN KEY (lot_id) REFERENCES lots (id)
 )
