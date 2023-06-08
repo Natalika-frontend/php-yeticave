@@ -61,9 +61,9 @@ $user_name = 'Natalia'; // укажите здесь ваше имя
         <ul class="nav__list container">
             <!--заполните этот список из массива категорий-->
             <?php
-            foreach ($categories as $key): ?>
+            foreach ($categories as $category): ?>
                 <li class="nav__item">
-                    <a href="pages/all-lots.html"><?= $key; ?></a>
+                    <a href="pages/all-lots.html"><?= $category['name_category']; ?></a>
                 </li>
             <?php
             endforeach; ?>

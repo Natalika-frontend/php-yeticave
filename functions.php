@@ -1,5 +1,6 @@
 <?php
 
+// функция для добавления пробела после тысяч и знака рубля
 function format_sum($sum)
 {
     $sum = ceil($sum);
@@ -9,6 +10,7 @@ function format_sum($sum)
     return $sum . " " . "₽";
 }
 
+// функция для форматирования оставшегося времени лота
 function get_remaining_time($date)
 {
 //    устанавливаем часовой пояс
@@ -27,7 +29,7 @@ function get_remaining_time($date)
     $hours = $arr_diff[0] * 24 + $arr_diff[1];
 //    запишем в переменную количество оставшихся минут
     $minutes = $arr_diff[2];
-//    отформатируем часы и минуты, стоб впереди появлялся 0
+//    отформатируем часы и минуты, чтоб впереди появлялся 0
     $hours = str_pad($hours, 2, 0, STR_PAD_LEFT);
     $minutes = str_pad($minutes, 2, 0, STR_PAD_LEFT);
 //    поместим часы и минуты в массив
@@ -36,3 +38,13 @@ function get_remaining_time($date)
 
     return $result;
 }
+
+;
+
+// функция запроса для получения списка лотов
+function get_list_lots()
+{
+    return "SELECT lots.lot_name, lots.start_price, lots.lot_image, lots.date_finish, categories.name_category FROM lots INNER JOIN categories ON lots.category_id = categories.id ORDER BY lots.date_create DESC";
+}
+
+;
