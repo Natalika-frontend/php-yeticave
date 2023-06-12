@@ -1,5 +1,10 @@
 <?php
 
+$is_auth = rand(0, 1);
+
+$user_name = 'Natalia'; // укажите здесь ваше имя
+
+
 $categories = [
     "boards" => "Доски и лыжи",
     "attachment" => "Крепления",
