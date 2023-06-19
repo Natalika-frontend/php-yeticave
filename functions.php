@@ -54,3 +54,48 @@ function get_lot($id)
 {
     return "SELECT lots.lot_name, lots.lot_description, lots.lot_image, lots.date_finish, lots.start_price, categories.name_category FROM lots JOIN categories ON lots.category_id = categories.id WHERE lots.id = $id";
 }
+
+// валидация категории
+function validate_category($id, $allowed_list)
+{
+    if (!in_array($id, $allowed_list)) {
+        return "Указана несуществующая категория";
+    }
+}
+
+// валидация номера
+function validate_number($num)
+{
+    if (!empty($num)) {
+        $num * 1;
+        if (is_int($num) && $num > 0) {
+            return null;
+        }
+        return "Содержимое поля должно быть целым числом больше нуля";
+    }
+}
+
+// валидация даты
+function validate_date($date)
+{
+    if (is_date_valid($date)) {
+        $now = date_create("now");
+        $d = date_create($date);
+        $diff = date_diff($d, $now);
+        $interval = date_interval_format($diff, "%d");
+
+        if ($interval < 1) {
+            return "Дата должна быть больше текущей не менее чем на один день";
+        };
+    } else {
+        return "Содержимое поля «дата завершения» должно быть датой в формате «ГГГГ-ММ-ДД»";
+    }
+}
+
+;
+
+// Создание нового лота
+function get_query_create_lot($user_id)
+{
+    return "INSERT INTO lots (lot_name, category_id, lot_description, start_price, bet_step, date_finish, lot_image, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, $user_id);";
+}
