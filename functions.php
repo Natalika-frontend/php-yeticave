@@ -67,9 +67,9 @@ function validate_category($id, $allowed_list)
 function validate_number($num)
 {
     if (!empty($num)) {
-        $num * 1;
+        $num = $num * 1;
         if (is_int($num) && $num > 0) {
-            return null;
+            return NULL;
         }
         return "Содержимое поля должно быть целым числом больше нуля";
     }

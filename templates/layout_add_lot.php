@@ -55,7 +55,7 @@
                 </li>
             </ul>
         </nav>
-        <?= $main;
+        <?= $main_add_lot;
         ?>
     </main>
 

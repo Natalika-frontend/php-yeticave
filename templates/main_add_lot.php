@@ -11,7 +11,7 @@ $classname = isset($errors) ? "form-invalid" : ""; ?>
         <div class="form__item <?= $classname; ?>"> <!-- form__item--invalid -->
             <label for="lot-name">Наименование <sup>*</sup></label>
             <input id="lot-name" type="text" name="lot-name" placeholder="Введите наименование лота"
-                   value="<?= $lot["lot-name"]; ?>">
+                   value="<?= $lot["lot-name"] ?? ""; ?>">
             <span class="form__error">Введите наименование лота</span>
         </div>
 
@@ -29,7 +29,7 @@ $classname = isset($errors) ? "form-invalid" : ""; ?>
                 endforeach; ?>
             </select>
 
-            <span class="form__error"><?= $errors["categories"]; ?></span>
+            <span class="form__error"><?= $errors["category"]; ?></span>
         </div>
     </div>
 
@@ -37,7 +37,8 @@ $classname = isset($errors) ? "form-invalid" : ""; ?>
     $classname = isset($errors["message"]) ? "form__item--invalid" : ""; ?>
     <div class="form__item form__item--wide <?= $classname; ?>">
         <label for="message">Описание <sup>*</sup></label>
-        <textarea id="message" name="message" placeholder="Напишите описание лота"><?= $lot["message"]; ?></textarea>
+        <textarea id="message" name="message"
+                  placeholder="Напишите описание лота"><?= $lot["message"] ?? ""; ?></textarea>
         <span class="form__error">Напишите описание лота</span>
     </div>
 
@@ -59,16 +60,16 @@ $classname = isset($errors) ? "form-invalid" : ""; ?>
         $classname = isset($errors["lot_rate"]) ? "form__item--invalid" : ""; ?>
         <div class="form__item form__item--small <?= $classname; ?>">
             <label for="lot-rate">Начальная цена <sup>*</sup></label>
-            <input id="lot-rate" type="text" name="lot-rate" placeholder="0">
-            <span class="form__error"><?= $errors["lot_rate"]; ?></span>
+            <input id="lot-rate" type="text" name="lot-rate" placeholder="Введите сумму">
+            <span class="form__error">Введите сумму</span>
         </div>
 
         <?php
         $classname = isset($errors["lot_step"]) ? "form__item--invalid" : ""; ?>
         <div class="form__item form__item--small <?= $classname; ?>">
             <label for="lot-step">Шаг ставки <sup>*</sup></label>
-            <input id="lot-step" type="text" name="lot-step" placeholder="0">
-            <span class="form__error"><?= $errors["lot_step"]; ?></span>
+            <input id="lot-step" type="text" name="lot-step" placeholder="Введите сумму">
+            <span class="form__error">Введите шаг ставки</span>
         </div>
 
         <?php
