@@ -97,5 +97,5 @@ function validate_date($date)
 // Создание нового лота
 function get_query_create_lot($user_id)
 {
-    return "INSERT INTO lots (lot_name, category_id, lot_description, start_price, bet_step, date_finish, lot_image, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, $user_id);";
+    return "INSERT INTO my_yeticave.lots (lot_name, category_id, lot_description, start_price, bet_step, date_finish, lot_image, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, $user_id)";
 }

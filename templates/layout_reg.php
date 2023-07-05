@@ -2,10 +2,9 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?= $title ?></title>
+    <title>Регистрация</title>
     <link href="../css/normalize.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
-    <link href="../css/flatpickr.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -23,28 +22,42 @@
             </form>
             <a class="main-header__add-lot button" href="add-lot.html">Добавить лот</a>
             <nav class="user-menu">
-                <?php
-                if ($is_auth): ?>
-                    <div class="user-menu__logged">
-                        <p><?= $user_name ?></p>
-                        <a class="user-menu__bets" href="my-bets.html">Мои ставки</a>
-                        <a class="user-menu__logout" href="#">Выход</a>
-                    </div>
-                <?php
-                else: ?>
-                    <ul class="user-menu__list">
-                        <li class="user-menu__item"><a href="/user_reg.php">Регистрация</a></li>
-                        <li class="user-menu__item"><a href="#">Вход</a></li>
-                    </ul>
-                <?php
-                endif; ?>
+                <ul class="user-menu__list">
+                    <li class="user-menu__item">
+                        <a href="sign-up.html">Регистрация</a>
+                    </li>
+                    <li class="user-menu__item">
+                        <a href="login.html">Вход</a>
+                    </li>
+                </ul>
             </nav>
         </div>
     </header>
 
     <main>
-        <?= $main_add_lot;
-        ?>
+        <nav class="nav">
+            <ul class="nav__list container">
+                <li class="nav__item">
+                    <a href="all-lots.html">Доски и лыжи</a>
+                </li>
+                <li class="nav__item">
+                    <a href="all-lots.html">Крепления</a>
+                </li>
+                <li class="nav__item">
+                    <a href="all-lots.html">Ботинки</a>
+                </li>
+                <li class="nav__item">
+                    <a href="all-lots.html">Одежда</a>
+                </li>
+                <li class="nav__item">
+                    <a href="all-lots.html">Инструменты</a>
+                </li>
+                <li class="nav__item">
+                    <a href="all-lots.html">Разное</a>
+                </li>
+            </ul>
+        </nav>
+        <?= $main_reg ?>
     </main>
 
 </div>
@@ -52,13 +65,24 @@
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
-            <?php
-            foreach ($categories as $category): ?>
-                <li class="nav__item">
-                    <a href="pages/all-lots.html"><?= $category['name_category']; ?></a>
-                </li>
-            <?php
-            endforeach; ?>
+            <li class="nav__item">
+                <a href="all-lots.html">Доски и лыжи</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Крепления</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Ботинки</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Одежда</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Инструменты</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Разное</a>
+            </li>
         </ul>
     </nav>
     <div class="main-footer__bottom container">
@@ -119,7 +143,4 @@
     </div>
 </footer>
 
-<script src="../flatpickr.js"></script>
-<script src="../script.js"></script>
 </body>
-</html>
