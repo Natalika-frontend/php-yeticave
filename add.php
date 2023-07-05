@@ -61,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         if (in_array($field, $required) && empty($value)) {
             $errors[$field] = "Поле необходимо заполнить";
-            var_dump($errors[$field]);
         }
     }
     $errors = array_filter($errors);

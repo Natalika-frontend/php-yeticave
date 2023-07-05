@@ -94,8 +94,64 @@ function validate_date($date)
 
 ;
 
+// валидация почты
+function validate_email($email)
+{
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return "E-mail должен быть корректным";
+    }
+}
+
+;
+
+// валидация диапазона
+function validate_length($value, $min, $max)
+{
+    if ($value) {
+        $len = strlen($value);
+        if ($len < $min or $len > $max) {
+            return "Значение должно быть от $min до $max символов";
+        }
+    }
+}
+
+;
+
 // Создание нового лота
 function get_query_create_lot($user_id)
 {
     return "INSERT INTO my_yeticave.lots (lot_name, category_id, lot_description, start_price, bet_step, date_finish, lot_image, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, $user_id)";
+}
+
+;
+
+// проверка существования пользователя
+function get_users_data($con)
+{
+    if (!$con) {
+        $error = mysqli_connect_error();
+        return $error;
+    } else {
+        $sql = "SELECT email, user_name FROM my_yeticave.user";
+        $result = mysqli_query($con, $sql);
+        if ($result) {
+            $users_data = get_arrow($result);
+            return $users_data;
+        }
+        $error = mysqli_error($con);
+        return $error;
+    }
+}
+
+// массив из объекта результата запроса
+function get_arrow($result_query)
+{
+    $row = mysqli_num_rows($result_query);
+    if ($row === 1) {
+        $arrow = mysqli_fetch_assoc($result_query);
+    } else if ($row > 1) {
+        $arrow = mysqli_fetch_all($result_query, MYSQLI_ASSOC);
+    }
+
+    return $arrow;
 }

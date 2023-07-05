@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Регистрация</title>
+    <title><?= $title ?></title>
     <link href="../css/normalize.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
 </head>
@@ -34,55 +34,20 @@
         </div>
     </header>
 
-    <main>
-        <nav class="nav">
-            <ul class="nav__list container">
-                <li class="nav__item">
-                    <a href="all-lots.html">Доски и лыжи</a>
-                </li>
-                <li class="nav__item">
-                    <a href="all-lots.html">Крепления</a>
-                </li>
-                <li class="nav__item">
-                    <a href="all-lots.html">Ботинки</a>
-                </li>
-                <li class="nav__item">
-                    <a href="all-lots.html">Одежда</a>
-                </li>
-                <li class="nav__item">
-                    <a href="all-lots.html">Инструменты</a>
-                </li>
-                <li class="nav__item">
-                    <a href="all-lots.html">Разное</a>
-                </li>
-            </ul>
-        </nav>
-        <?= $main_reg ?>
-    </main>
+    <?= $main_reg ?>
 
 </div>
 
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
-            <li class="nav__item">
-                <a href="all-lots.html">Доски и лыжи</a>
-            </li>
-            <li class="nav__item">
-                <a href="all-lots.html">Крепления</a>
-            </li>
-            <li class="nav__item">
-                <a href="all-lots.html">Ботинки</a>
-            </li>
-            <li class="nav__item">
-                <a href="all-lots.html">Одежда</a>
-            </li>
-            <li class="nav__item">
-                <a href="all-lots.html">Инструменты</a>
-            </li>
-            <li class="nav__item">
-                <a href="all-lots.html">Разное</a>
-            </li>
+            <?php
+            foreach ($categories as $category): ?>
+                <li class="nav__item">
+                    <a href="pages/all-lots.html"><?= $category['name_category']; ?></a>
+                </li>
+            <?php
+            endforeach; ?>
         </ul>
     </nav>
     <div class="main-footer__bottom container">
