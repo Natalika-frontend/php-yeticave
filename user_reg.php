@@ -45,9 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $user = filter_input_array(INPUT_POST, [
         "email" => FILTER_DEFAULT,
+        "name" => FILTER_DEFAULT,
         "password" => FILTER_DEFAULT,
-        "message" => FILTER_DEFAULT,
-        "name" => FILTER_DEFAULT
+        "message" => FILTER_DEFAULT
+
     ], true);
 
     foreach ($user as $field => $value) {
@@ -93,20 +94,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if ($result) {
                 $user_id = mysqli_insert_id($connection);
-                header("Location: login.php");
+                header("Location: /login.php");
             } else {
                 $error = mysqli_error($connection);
+                var_dump($error);
             }
         }
     }
 }
 
-$layout_reg = include_template("layout_reg.php", [
+if (isset($_SESSION['id'])) {
+    $main = http_response_code(403);
+    exit();
+}
+
+$layout = include_template("layout.php", [
     'title' => "Регистрация",
-    'main_reg' => $main_reg,
+    'main' => $main_reg,
     'categories' => $categories,
     'is_auth' => $is_auth,
     'user_name' => $user_name
 ]);
 
-print($layout_reg);
+print($layout);

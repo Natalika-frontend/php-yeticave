@@ -16,13 +16,11 @@ if (!$connection) {
     } else {
         $error = mysqli_error($connection);
     }
-
-    $categories_id = array_column($categories, "id");
-
-    $content = include_template('data.php', ['categories' => $categories]);
 }
 
-$page_content = include_template("main_add_lot.php", [
+$categories_id = array_column($categories, "id");
+
+$main = include_template("main_add_lot.php", [
     "categories" => $categories
 ]);
 
@@ -88,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (count($errors)) {
-        $page_content = include_template("main_add_lot.php", [
+        $main = include_template("main_add_lot.php", [
             "categories" => $categories,
             "lot" => $lot,
             "errors" => $errors
@@ -101,16 +99,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($result) {
             $lot_id = mysqli_insert_id($connection);
-            header("Location: lot.php?id=" . $lot_id);
+            header("Location: /lot.php?id=" . $lot_id);
         } else {
             $error = mysqli_error($connection);
         }
     }
 }
 
-$layout = include_template("layout_add_lot.php", [
+if (!isset($_SESSION['id'])) {
+    $main = http_response_code(403);
+    exit();
+}
+
+$layout = include_template("layout.php", [
     "title" => "Добавить лот",
-    "main_add_lot" => $page_content,
+    "main" => $main,
     "categories" => $categories,
     "is_auth" => $is_auth,
     "user_name" => $user_name

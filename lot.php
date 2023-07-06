@@ -42,8 +42,8 @@ $main_lot = include_template("main_lot.php", [
     "lot" => $lot
 ]);
 
-$layout_lot = include_template("layout_lot.php", [
-    "main_lot" => $main_lot,
+$layout = include_template("layout.php", [
+    "main" => $main_lot,
     "categories" => $categories,
     "title" => "Главная",
     "is_auth" => $is_auth,
@@ -51,4 +51,4 @@ $layout_lot = include_template("layout_lot.php", [
 
 ]);
 
-print($layout_lot);
+print($layout);
