@@ -36,6 +36,9 @@ CREATE TABLE lots
     FOREIGN KEY (category_id) REFERENCES categories (id)
 );
 
+ALTER TABLE lots
+    ADD FULLTEXT (lot_name, lot_description);
+
 CREATE TABLE bets
 (
     id       INT AUTO_INCREMENT PRIMARY KEY,

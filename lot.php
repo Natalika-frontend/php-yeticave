@@ -4,6 +4,7 @@ require_once("helpers.php");
 require_once("functions.php");
 require_once("data.php");
 require_once("connection.php");
+require_once("models.php");
 
 if (!$connection) {
     print("Ошибка подключения: " . mysqli_connect_error());

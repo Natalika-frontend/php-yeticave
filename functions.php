@@ -1,6 +1,9 @@
 <?php
-
-// функция для добавления пробела после тысяч и знака рубля
+/**
+ * * Форматирует цену лота - разделяет пробелом разряды числа, добавляет знак рубля
+ * @param integer $sum Цена лота
+ * @return string Как цена будет показываться в карточке
+ */
 function format_sum($sum)
 {
     $sum = ceil($sum);
@@ -10,7 +13,10 @@ function format_sum($sum)
     return $sum . " " . "₽";
 }
 
-// функция для форматирования оставшегося времени лота
+/** Возвращает количество целых часов и остатка минут от настоящего времени до даты окончания приема ставок
+ * @param string $date Дата истечения времени
+ * @return array
+ */
 function get_remaining_time($date)
 {
 //    устанавливаем часовой пояс
@@ -41,21 +47,13 @@ function get_remaining_time($date)
 
 ;
 
-// функция запроса для получения списка лотов
-function get_list_lots()
-{
-    return "SELECT lots.id, lots.lot_name, lots.start_price, lots.lot_image, lots.date_finish, categories.name_category FROM lots INNER JOIN categories ON lots.category_id = categories.id ORDER BY lots.date_create DESC";
-}
-
-;
-
-// функция получения информации о лоте
-function get_lot($id)
-{
-    return "SELECT lots.lot_name, lots.lot_description, lots.lot_image, lots.date_finish, lots.start_price, categories.name_category FROM lots JOIN categories ON lots.category_id = categories.id WHERE lots.id = $id";
-}
-
-// валидация категории
+/**
+ * Валидирует поле категории, если такой категории нет в списке
+ * возвращает сообщение об этом
+ * @param int $id категория, которую ввел пользователь в форму
+ * @param array $allowed_list Список существующих категорий
+ * @return string Текст сообщения об ошибке
+ */
 function validate_category($id, $allowed_list)
 {
     if (!in_array($id, $allowed_list)) {
@@ -63,7 +61,11 @@ function validate_category($id, $allowed_list)
     }
 }
 
-// валидация номера
+/**
+ * Проверяет что содержимое поля является числом больше нуля
+ * @param string $num число которое ввел пользователь в форму
+ * @return string Текст сообщения об ошибке
+ */
 function validate_number($num)
 {
     if (!empty($num)) {
@@ -75,7 +77,11 @@ function validate_number($num)
     }
 }
 
-// валидация даты
+/**
+ * Проверяет что дата окончания торгов не меньше одного дня
+ * @param string $date дата, которую ввел пользователь в форму
+ * @return string Текст сообщения об ошибке
+ */
 function validate_date($date)
 {
     if (is_date_valid($date)) {
@@ -94,7 +100,11 @@ function validate_date($date)
 
 ;
 
-// валидация почты
+/**
+ * Проверяет что содержимое поля является корректным адресом электронной почты
+ * @param string $email адрес электронной почты
+ * @return string Текст сообщения об ошибке
+ */
 function validate_email($email)
 {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -104,7 +114,13 @@ function validate_email($email)
 
 ;
 
-// валидация диапазона
+/**
+ * Проверяет что содержимое поля укладывается в допустимый диапазон
+ * @param string $value содержимое поля
+ * @param int $min минимальное количество символов
+ * @param int $max максимальное количество символов
+ * @return string Текст сообщения об ошибке
+ */
 function validate_length($value, $min, $max)
 {
     if ($value) {
@@ -117,33 +133,10 @@ function validate_length($value, $min, $max)
 
 ;
 
-// Создание нового лота
-function get_query_create_lot($user_id)
-{
-    return "INSERT INTO my_yeticave.lots (lot_name, category_id, lot_description, start_price, bet_step, date_finish, lot_image, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, $user_id)";
-}
-
-;
-
-// проверка существования пользователя
-function get_users_data($con)
-{
-    if (!$con) {
-        $error = mysqli_connect_error();
-        return $error;
-    } else {
-        $sql = "SELECT email, user_name FROM my_yeticave.user";
-        $result = mysqli_query($con, $sql);
-        if ($result) {
-            $users_data = get_arrow($result);
-            return $users_data;
-        }
-        $error = mysqli_error($con);
-        return $error;
-    }
-}
-
-// массив из объекта результата запроса
+/** Возвращает массив из объекта результата запроса
+ * @param object $result_query mysqli Результат запроса к базе данных
+ * @return array
+ */
 function get_arrow($result_query)
 {
     $row = mysqli_num_rows($result_query);
@@ -156,20 +149,3 @@ function get_arrow($result_query)
     return $arrow;
 }
 
-// массив данных почты и хеш пароля
-function get_login($con, $email)
-{
-    if (!$con) {
-        $error = mysqli_connect_error();
-        return $error;
-    } else {
-        $sql = "SELECT id, email, user_name, user_password FROM my_yeticave.user WHERE email = '$email'";
-        $result = mysqli_query($con, $sql);
-        if ($result) {
-            $users_data = get_arrow($result);
-            return $users_data;
-        }
-        $error = mysqli_error($con);
-        return $error;
-    }
-}
