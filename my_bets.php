@@ -19,17 +19,16 @@ if (!$connection) {
     };
 };
 
+$header = include_template("header.php", [
+    "categories" => $categories
+]);
 
 if ($is_auth) {
     $bets = get_bets($connection, $_SESSION["id"]);
 }
 
-$header = include_template("header.php", [
-    "categories" => $categories
-]);
 
-
-$main = include_template("main-my-bets.php", [
+$main = include_template("main_my_bets.php", [
     "categories" => $categories,
     "header" => $header,
     "bets" => $bets,

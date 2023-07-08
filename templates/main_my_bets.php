@@ -4,7 +4,7 @@
     <section class="rates container">
         <h2>Мои ставки</h2>
         <?php
-        if (!empty($bets)): ?>
+        if (!empty($bets)):?>
             <table class="rates__list">
                 <?php
                 foreach ($bets as $bet): ?>
@@ -52,5 +52,3 @@
         endif; ?>
     </section>
 </main>
-
-<!--TODO разобраться почему не выводятся ставки -->
