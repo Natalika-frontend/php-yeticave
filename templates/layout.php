@@ -18,7 +18,7 @@
             </a>
             <form class="main-header__search" method="get" action="search.php" autocomplete="off">
                 <input type="search" name="search" placeholder="Поиск лота"
-                       value="">
+                       value="<?= $search ?? ""; ?>">
 
                 <input class="main-header__search-btn" type="submit" name="find" value="Найти">
             </form>
@@ -31,7 +31,7 @@
                 if ($is_auth): ?>
                     <div class="user-menu__logged">
                         <p><?= $user_name ?></p>
-                        <a href="pages/my-bets.html" class="user-menu__bets">Мои ставки</a>
+                        <a href="my_bets.php" class="user-menu__bets">Мои ставки</a>
                         <a href="logout.php" class="user-menu__logout">Выход</a>
                     </div>
                 <?php
